@@ -1,0 +1,24 @@
+1. research how to have the nodalMCU esp8266 12e connect and communicate 
+with the arduino and vise versa
+
+2. research how to create a reinforcement learning (RL) AI
+
+3. research how to change the storage and limits of the AI
+
+4. research how to use the wifi modual to ensure the data given and outputted 
+by the AI is what is intended
+
+5. find ways to reduce the global ram, IRAM, and flash if needed
+
+6. for better memory storage, research how to use the wifi shield modual can connect to the esp,
+to allow the ai to pull from a larger memory file. or see if the esp can use wifi to 
+communicate with other devices
+
+7. research how to drive the robot, and collect data for the ai; 
+before the ai learns to drive itself
+
+8. test the limits of the RL AI, by testing the max amount of inputs it can handle, 
+text it can read in the memory bank, etc.
+
+9. reduce and finalize the code it possible, less ram and memory the better; 
+gives better opportunity for the ai to learn from its mistakes.
