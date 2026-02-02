@@ -1,0 +1,27 @@
+1) create an object / Enum with the established actions 
+
+2) create parameters for the weighted values to influences object variables 
+
+3) create an initial thinking process that is random, 
+and ensure the weighted values are adding up to 1. 
+then also add a point value to each failure and action it gets right, 
+using a point system. every time the ai gets the right answer the scores becomes higher, 
+and stores the success path. for every time it gets the wrong value, 
+it gives a negative score to the ai. and then with the failure change the weighted values. 
+however initially, we may need to store the failed attempts, 
+because it wont get to the right answer otherwise. 
+
+4) create a method that grabs the actions and the weighted values and store them into a file 
+
+5) once enough information has been gathered, have an alternate condition that states that, 
+if x amount of data has been collected, or if the success rate of 
+said action is above 60% then use this information and default to the data within the storage. 
+by grabbing the values from the stored data, then modify the object variables to those variables, 
+then it makes the same decision based on the modification 
+
+6) once this proves to be successful, create an alternative condition that separates 
+every new object detected within the robots instance life time (when it turns off and on). 
+so if it detects going right at object 1 is successful most of the time, it does that, 
+but then it then creates a new batch of information once it reaches step 2, 
+in which it defaults to the randomness until the data helps it achieve desirable outcomes
+
