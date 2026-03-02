@@ -13,12 +13,19 @@ ensure that there is a way the AI is able to read specific parts of the file
     and what didnt work based on the obstacles presented
 */
 #include "mem.h"
-#include <EEPROM.h>
-
+#include "actions.h"
+/*
 #define EEPROM_SIZE 128
 #define BRAIN_ADDR  0
 #define MAGIC_ADDR  100
 #define MAGIC_VALUE 0x42
+
+
+float Q[STATE_COUNT][ACTION_COUNT];
+
+float alpha = 0.2;
+float g = 0.9;
+
 
 void initMemory() {
   EEPROM.begin(EEPROM_SIZE);
@@ -28,18 +35,19 @@ void initMemory() {
 bool memoryExists() {
   return EEPROM.read(MAGIC_ADDR) == MAGIC_VALUE;
 }
-
+/*
 void saveBrain(const AIBrain &brain) {
   EEPROM.put(BRAIN_ADDR, brain);
   EEPROM.write(MAGIC_ADDR, MAGIC_VALUE);
   EEPROM.commit();
 }
+*/
 /*
 saves the actions the ai did into a memory storage
 try to use this periotically and/or 
 only when used when the AI is going to turn off
 */
-
+/*
 void maybeSaveBrain(AIBrain &brain) {
   static unsigned long lastSave = 0;
 
@@ -48,13 +56,15 @@ void maybeSaveBrain(AIBrain &brain) {
     lastSave = millis();
   }
 }
+*/
 //periotically saves the memory
-
+/*
 void loadBrain(AIBrain &brain) {
   EEPROM.get(BRAIN_ADDR, brain);
 }
+*/
 // loads the memory to read
-
+/*
 void clearMemory() {
   EEPROM.write(MAGIC_ADDR, 0x00);  // invalidate memory
   EEPROM.commit();
@@ -67,6 +77,32 @@ void wipeEEPROM() {
   }
   EEPROM.commit();
 }
+
+void initQ() {
+  for (int s = 0; s < STATE_COUNT; s++) {
+    for (int a = 0; a < ACTION_COUNT; a++) {
+      Q[s][a] = 0.0;
+    }
+  }
+}
+
+
+void updateQ(int state, actions &action, float reward, int nextState) {
+  float maxNext = Q[nextState][0];
+
+  for (int a = 1; a < ACTION_COUNT; a++) {
+    if (Q[nextState][a] > maxNext) {
+      maxNext = Q[nextState][a];
+    }
+  }
+
+  Q[state][action] =
+    Q[state][action] +
+    alpha * (reward + g * maxNext - Q[state][action]);
+}
+
+
+
 // only use when the ai cannot wipe the memory correctly
 
 /*
