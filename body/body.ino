@@ -13,7 +13,6 @@ the point of the body should be:
 #include "variable.h"
 #include "sensors.h"
 #include "movement.h"
-#include <SoftwareSerial.h>
 //check the above library, it may be only for arduino uno
 
 using namespace std;
@@ -38,6 +37,11 @@ void setup(){
 }
 
 void loop(){
+  /*
+  order for arduino
+  detects new inputs -> waits for esp response -> 
+  -> executes response -> sends new data 
+  */
   unsigned long start = millis();
 
   /*
@@ -56,10 +60,19 @@ void loop(){
     }
     //if the arduino does not respond after a certain amount of time, 
     //it escapes the loop
-    
-    m.Forward(100); //testing purposes
 
   }
+  int score, left, middle, right, checkpoint = 0;
+
+  byte packet1 = 0;
+
+  packet1 |= (left << 7);
+  packet1 |= (middle << 6);
+  packet1 |= (right << 5);
+  packet1 |= (checkpoint << 4);
+
+  Serial.write(packet1);
+  Serial.write(score);
   /*
   recieves information from the esp and 
     executes decisions that the esp created
@@ -67,6 +80,15 @@ void loop(){
 
 }
 
+void executeAction(char a) {
+    switch(a) {
+        case 'f': m.Forward(100); break;
+        case 'l': m.turn(-100, 100); break;
+        case 'r': m.turn(100, -100); break;
+        case 'b': m.Forward(-100); break;
+        case 's': m.stop(); break; 
+    }
+}
 
 
 

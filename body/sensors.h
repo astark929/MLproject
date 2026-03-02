@@ -2,10 +2,7 @@
 #define SENSORS_H
 #pragma once
 
-#include <Arduino.h>
-#include <Servo.h>
 #include "variable.h"
-#include <SoftwareSerial.h>
 
 extern SoftwareSerial espSerial;
 
@@ -16,6 +13,10 @@ class sensors {
     void line();
     bool espAvailable();
     int espRead();
+    void Sangle(int a);
+    bool lidar_left();
+    void lidar_right();
+    String lidar_detect();
     
   private:
     //SoftwareSerial espSerial(10, 11); //initalizing ports to communicate with esp

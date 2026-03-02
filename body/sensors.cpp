@@ -1,10 +1,11 @@
 #include "sensors.h"
-#include <SoftwareSerial.h>
 
 SoftwareSerial espSerial(10, 11); //initalizing ports to communicate with esp
 
 using namespace std;
 
+
+Servo servo;
 
 sensors::sensors(){
   pinMode(Trig_PIN, output); 
@@ -81,4 +82,44 @@ bool sensors::espAvailable() {
 }
 int sensors::espRead() {
     return espSerial.read();
+}
+
+
+void sensors::Sangle(int a){
+  servo.write(a);
+}
+
+bool sensors::lidar_left(){
+  int IRvalueLeft= digitalRead(RightObstacleSensor);
+  if(IRvalueLeft == high){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+void sensors::lidar_right(){
+  int IRvalueRight=digitalRead(LeftObstacleSensor);
+  if(IRvalueRight == high){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+String sensors::lidar_detect(){
+  int IRvalueLeft= digitalRead(RightObstacleSensor);
+  int IRvalueRight=digitalRead(LeftObstacleSensor);
+  if(IRvalueLeft == high && IRvalueRight == high){
+    return "object front";
+  }
+  else if(IRvalueLeft == high && IRvalueRight == low){
+    return "object left";
+  }
+  else if(IRvalueLeft == low && IRvalueRight == high){
+    return "object right";
+  }
+  else{
+    return "no object";
+  }
 }

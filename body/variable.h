@@ -1,5 +1,15 @@
 #pragma once
 
+
+#include <SoftwareSerial.h>
+#include <stdbool.h>
+#include <Servo.h>
+#include <Arduino.h>
+
+
+#include <WiFiEsp.h>
+#include <WiFiEspUDP.h>
+
 #define SPEED 100
 #define TURN_SPEED 100
 
@@ -17,7 +27,7 @@
 #define LeftMotorDirPin2B 8
 #define speedPinLB 12
 
-#
+//#
 /*
 motor pins above
 ----------------------------------------------
@@ -60,5 +70,42 @@ const uint8_t input  = INPUT;
 const uint8_t high = HIGH;
 const uint8_t low  = LOW;
 
+
+/*
+---------------------------------------------------
+other stuff that may be useful later
+*/
+
+const int red = 5;
+const int blue = 10;
+const int green = 6;
+
+
+#define RightObstacleSensor 2  //Right lidar
+#define LeftObstacleSensor 3   //Left lidar
+//lidar sensors
+
+
+//the stuff below is the bluetooth stuff
+#define MAX_PACKETSIZE 32    //Serial receive buffer
+extern char buffUART[MAX_PACKETSIZE];
+extern unsigned int buffUARTIndex;
+extern unsigned long preUARTTick;
+struct car_status {
+  int speed;
+  int angle;
+  int direct;
+};
+
+
+//-------------------------------------------------------
+
+//this is the wifi stuff
+extern char ssid[];
+extern char pass[];
+extern int status;
+extern char packetBuffer[5];
+extern WiFiEspUDP Udp;
+extern unsigned int localPort;
 
 

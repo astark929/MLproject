@@ -2,7 +2,6 @@
 #define MOVEMENT_H
 #pragma once
 
-#include <Arduino.h>
 #include "variable.h"
 
 class movement {
@@ -12,7 +11,7 @@ class movement {
     void stopArdumoto(byte motor);
     void stop();  
     void Forward(int speed);
-    void turn(int rs, int ls);
+    void turn(int ls, int rs);
     void Motor_FR(int motorSpeed);
     void Motor_FL(int motorSpeed);
     void Motor_BR(int motorSpeed);
