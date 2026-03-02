@@ -46,41 +46,6 @@ actions chooseAction(AIBrain &brain, int state) {
   return (actions)bestAction;
 }
 
-actions choose(bool leftOpen, bool midOpen, bool rightOpen) {
-
-    uint16_t temp[3];
-
-    temp[FORWARD] = midOpen  ? weightsVal[FORWARD]  : 0;
-    temp[LEFT]    = leftOpen ? weightsVal[LEFT]     : 0;
-    temp[RIGHT]   = rightOpen? weightsVal[RIGHT]    : 0;
-    /*
-    above is the ternary operator
-    basically its an if else statement, saying if true set
-    set the temp forward placement to the forward placement in weightsVal,
-    else its 0
-    */
-    if(leftOpen){
-      temp[0] == temp[0] * .5;
-    }
-    if(midOpen){
-      temp[0] == temp[1] * .5;
-    }
-    if(rightOpen){
-      temp[0] == temp[3] * .5;
-    }
-
-    uint16_t sum = temp[0] + temp[1] + temp[2];
-
-    uint16_t r = random(sum);
-
-    if (r <= temp[FORWARD])
-        return FORWARD;
-    else if (r <= temp[FORWARD] + temp[LEFT])
-        return LEFT;
-    else
-        return RIGHT;
-}
-
 void updateQ(AIBrain &brain, int state, actions action, float reward, int nextState) {
 
   // Find best next action value
@@ -137,3 +102,42 @@ actions choose(){
     return RIGHT;
   }
 }
+//code above is likely a dead code right now
+//in other words, code that isnt being used anymore
+
+actions choose(bool leftOpen, bool midOpen, bool rightOpen) {
+
+    uint16_t temp[3];
+
+    temp[FORWARD] = midOpen  ? weightsVal[FORWARD]  : 0;
+    temp[LEFT]    = leftOpen ? weightsVal[LEFT]     : 0;
+    temp[RIGHT]   = rightOpen? weightsVal[RIGHT]    : 0;
+    /*
+    above is the ternary operator
+    basically its an if else statement, saying if true set
+    set the temp forward placement to the forward placement in weightsVal,
+    else its 0
+    */
+    if(leftOpen){
+      temp[0] = temp[0] * .5;
+    }
+    if(midOpen){
+      temp[0] = temp[1] * .5;
+    }
+    if(rightOpen){
+      temp[0] = temp[3] * .5;
+    }
+
+    uint16_t sum = temp[0] + temp[1] + temp[2];
+
+    uint16_t r = random(sum);
+
+    if (r <= temp[FORWARD])
+        return FORWARD;
+    else if (r <= temp[FORWARD] + temp[LEFT])
+        return LEFT;
+    else
+        return RIGHT;
+}
+//code above is likely a dead code right now
+//in other words, code that isnt being used anymore
