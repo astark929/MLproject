@@ -1,4 +1,6 @@
 
-this version of the RL ai (altML) is entirely meant for larger scale information. it should be able to generalize. however there could be an issue of data leakage or data not being processed correctly with all of these objects being called.
+this version of the RL ai (altML) is entirely meant for larger scale information. 
+it should be able to generalize. however there could be an issue of data leakage 
+or data not being processed correctly with all of these objects being called.
 
 it is not finalized yet
