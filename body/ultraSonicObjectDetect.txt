@@ -1,0 +1,37 @@
+
+
+void sensors::ultraSonic(){
+
+    sensors::Sangle(45);
+    left = usObject(); //checks left side for object and saves as bool
+    time(1);
+
+       
+    sensors::Sangle(90);
+    middle = usObject(); //checks front side for object and saves as bool
+    time(1);
+
+      
+    sensors::Sangle(135); 
+    right = usObject(); //checks right side for object and saves as bool
+    time(1);
+
+}
+
+
+int time(int x){
+
+delay(x*1000); 
+ 
+}
+
+int sensors::usObject() { //used to check if their is an object within 7.5 inches of the robot
+    float inRange = getDistance();
+    
+    if (inRange = 7.50){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
