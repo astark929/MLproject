@@ -1,0 +1,60 @@
+
+void loop(){
+
+  order for arduino
+  detects new inputs -> waits for esp response -> 
+  -> executes response -> sends new data 
+ 
+  unsigned long start = millis();
+  
+  left, middle, right = 0 
+  
+  input method or script that uses the inputs of the sensors
+  and then sends them to the esp
+
+  s.Sangle(135);
+  if(s.getdistance() > 7.5){  //put it greather than a length to help it determine the distance to check to see if there is an object
+    left = true;
+  }
+  s.Sangle(90);
+  if(s.getdistance() > 7.5){ 
+    middle = true;
+  }
+  s.Sangle(45);
+  if(s.getdistance() > 7.5){ 
+    right = true;
+  }
+
+  int score, checkpoint = 0;
+
+  byte packet1 = 0;
+
+  packet1 |= (left << 7);
+  packet1 |= (middle << 6);
+  packet1 |= (right << 5);
+  packet1 |= (checkpoint << 4);
+
+  Serial.write(packet1);
+  Serial.write(score);
+
+  while(!s.espAvailable()){
+    //waits for esp response
+    //the while statement will skip once there is data
+    //  for the esp
+    if (millis() - start > 100) {
+        // timeout after 100ms
+        break;
+    }
+    //if the arduino does not respond after a certain amount of time, 
+    //it escapes the loop
+
+  }
+
+  
+  if (s.espAvailable() > 0){
+    char command = s.espRead();
+    executeAction(command);
+  }
+  
+
+}
