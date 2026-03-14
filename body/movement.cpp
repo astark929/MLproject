@@ -73,17 +73,17 @@ void movement::Motor_FR(int motorSpeed)                          //function for 
   if (motorSpeed > 0)                                 //if the motor should drive forward (positive speed)
   {
     digitalWrite(RightMotorDirPin1, forward);                      //set pin 2 to high or FORWARD
-    //digitalWrite(RightMotorDirPin2, forward);
+    digitalWrite(RightMotorDirPin2, reverse);
   }
   else if (motorSpeed < 0)                            //if the motor should drive backwar (negative speed)
   {
     digitalWrite(RightMotorDirPin1, reverse);                      //set pin 1 to low or REVERSE
-    //digitalWrite(RightMotorDirPin2, reverse);
+    digitalWrite(RightMotorDirPin2, high);
   }
   else                                                //if the motor should stop
   {
     digitalWrite(RightMotorDirPin1, 0);
-    //digitalWrite(RightMotorDirPin2, 0);
+    digitalWrite(RightMotorDirPin2, 0);
     analogWrite(speedPinR, 0);
    }
   analogWrite(speedPinR, abs(motorSpeed));                 //now that the motor direction is set, drive it at the entered Joystick speed
@@ -94,17 +94,17 @@ void movement::Motor_FL(int motorSpeed)                           //function for
   if (motorSpeed > 0)                                  //if the motor should drive forward (positive speed)
   {
     digitalWrite(LeftMotorDirPin1, forward);                       //set pin 1 to high
-    //digitalWrite(LeftMotorDirPin2, forward);
+    digitalWrite(LeftMotorDirPin2, reverse);
   }
   else if (motorSpeed < 0)                             //if the motor should drive backward (negative speed)
   {
     digitalWrite(LeftMotorDirPin1, reverse);                       //set pin 1 to low
-    //digitalWrite(LeftMotorDirPin2, reverse);
+    digitalWrite(LeftMotorDirPin2, forward);
   }
   else                                                //STOP Motor_B
   {
     digitalWrite(LeftMotorDirPin1, 0);                              // STOP motor_B
-    //digitalWrite(LeftMotorDirPin2, 0);
+    digitalWrite(LeftMotorDirPin2, 0);
     analogWrite(speedPinL, 0);
   }
   analogWrite(speedPinL, abs(motorSpeed));                 //now that the motor direction is set, drive it at the entered Joystick speed
@@ -115,17 +115,17 @@ void movement::Motor_BR(int motorSpeed)                           //function for
   if (motorSpeed > 0)                                  //if the motor should drive forward (positive speed)
   {
     digitalWrite(RightMotorDirPin1B, forward);                       //set pin 1 to high
-    //digitalWrite(RightMotorDirPin2B, forward); 
+    digitalWrite(RightMotorDirPin2B, reverse); 
   }
   else if (motorSpeed < 0)                             //if the motor should drive backward (negative speed)
   {
     digitalWrite(RightMotorDirPin1B, reverse);                       //set pin 1 to low
-    //digitalWrite(RightMotorDirPin2B, reverse);
+    digitalWrite(RightMotorDirPin2B, forward);
   }
   else                                                //STOP Motor_B
   {
     digitalWrite(RightMotorDirPin1B, 0);                              // STOP motor_B
-    //digitalWrite(RightMotorDirPin2B, 0);
+    digitalWrite(RightMotorDirPin2B, 0);
     analogWrite(speedPinRB, 0);
   }
   analogWrite(speedPinRB, abs(motorSpeed));                 //now that the motor direction is set, drive it at the entered Joystick speed
@@ -137,19 +137,21 @@ void movement::Motor_BL(int motorSpeed)                           //function for
   if (motorSpeed > 0)                                  //if the motor should drive forward (positive speed)
   {
     digitalWrite(LeftMotorDirPin1B, forward);                       //set pin 1 to high
-    //digitalWrite(LeftMotorDirPin2B, forward);
+    digitalWrite(LeftMotorDirPin2B, reverse);
+    analogWrite(speedPinLB, abs(motorSpeed));
   }
   else if (motorSpeed < 0)                             //if the motor should drive backward (negative speed)
   {
     digitalWrite(LeftMotorDirPin1B, reverse);                       //set pin 1 to low
-    //digitalWrite(LeftMotorDirPin2B, reverse);
+    digitalWrite(LeftMotorDirPin2B, forward);
+    analogWrite(speedPinLB, abs(motorSpeed));
   }
   else                                                //STOP Motor_B
   {
     digitalWrite(LeftMotorDirPin1B, 0);                              // STOP motor_B
-    //digitalWrite(LeftMotorDirPin2B, 0);
+    digitalWrite(LeftMotorDirPin2B, 0);
     analogWrite(speedPinLB, 0);
   }
-  analogWrite(speedPinLB, abs(motorSpeed));                 //now that the motor direction is set, drive it at the entered Joystick speed
+  //analogWrite(speedPinLB, abs(motorSpeed));                 //now that the motor direction is set, drive it at the entered Joystick speed
 
 }
