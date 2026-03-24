@@ -13,6 +13,7 @@ the point of the body should be:
 #include "variable.h"
 #include "sensors.h"
 #include "movement.h"
+#include "SoftwareSerial.h"
 //check the above library, it may be only for arduino uno
 
 using namespace std;
@@ -35,6 +36,7 @@ void setup(){
   
   */
   Serial.begin(9600); //communicating with USB for debugging
+  Serial2.begin(9600);
   
   servo.attach(13);
 }
@@ -48,7 +50,9 @@ void loop(){
 
   unsigned long start = millis();
   
-  int left, middle, right = 0;
+  int left = 0;
+  int middle = 0;
+  int right = 0;
   //input method or script that uses the inputs of the sensors
   //and then sends them to the esp
 
@@ -65,7 +69,8 @@ void loop(){
     right = true;
   }
 
-  int score, checkpoint = 0;
+  int score = 0;
+  int checkpoint = 0;
 
   byte packet1 = 0;
 
@@ -74,8 +79,8 @@ void loop(){
   packet1 |= (right << 5);
   packet1 |= (checkpoint << 4);
 
-  Serial.write(packet1);
-  Serial.write(score);
+  Serial2.write(packet1);
+  Serial2.write(score);
 
   while(!s.espAvailable()){
     //waits for esp response
@@ -114,6 +119,3 @@ void executeAction(char a) {
         case 's': m.stop(); break; 
     }
 }
-
-
-
