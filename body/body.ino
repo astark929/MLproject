@@ -20,7 +20,9 @@ using namespace std;
 movement m;
 sensors s;
 
-int left, middle, right = 0;
+int left = 0
+int middle = 0;
+int right = 0;
 
 void setup(){
   /*
