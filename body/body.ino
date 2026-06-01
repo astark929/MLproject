@@ -23,6 +23,7 @@ sensors s;
 int left = 0
 int middle = 0;
 int right = 0;
+int score, left, middle, right, checkpoint;
 
 void setup(){
   /*
@@ -67,7 +68,7 @@ void loopa(){
     right = 1;
   }
 
-  int score, left, middle, right, checkpoint = 0;
+  score = left = middle = right = checkpoint = 0;
 
   byte packet1 = 0;
 
